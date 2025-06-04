@@ -1,10 +1,10 @@
 from .ConnectToAPI import ConnectToAPI
 from .Revisions import Revisions
-# parameters for searching wiki
-
 
 class Search(ConnectToAPI):
     
+    # parameters for conducting a search with wiki api
+    # note srsearch is intentionally left as a blank string
     def __init__(self):
         super().__init__("Search")
         self.params = {
@@ -15,7 +15,10 @@ class Search(ConnectToAPI):
         }
     
     def searchWiki(self, search_page):
+        # input from main becomes srseach parameter
         self.params["srsearch"] = search_page
+
+        # use ConnectToApi inheritence to perform get request
         DATA = super().connect(self.params, self.name)
 
         # check if search results exists
