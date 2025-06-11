@@ -21,8 +21,7 @@
 * Revisions will return at most 30 recent edits, along with the username if not private and the dates of the revision.
 * Main will handle the user input for searching and creating an instance of Search() and importing from the packages.
 * Packaged all the classes under the wiki directory.
-* Each class in the wiki folder has its own tests inside the tests folder (test_ConnectToAPI, test_Revisions, & test_Search)
-* implemented TDD into the program when writing the tests
-* Each tests have their own tests to test depending on the class:
-         * for example for the test_ConnectToAPI there is a test that tests if the if the url property returns the wiki api endpoint
+* Each class in the wiki folder has its own tests inside the tests folder (test_ConnectToAPI, test_Revisions, & test_Search).
+* Implemented Test-Driven Development (TDD) by writing tests that reflect the expected behavior of each class.
+* Each test file has focused test cases. For example for the test_ConnectToAPI there is a test that tests if the if the url property returns the wiki api endpoint.
   
