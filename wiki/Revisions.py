@@ -25,11 +25,9 @@ class Revisions(ConnectToAPI):
         # perform get request with updated parameters
         DATA = super().connect(self.params, self.name)
 
-        # initialize a counter and print out revisions (max 30)
-        count = 0
-        print("\nHere are the most recent changes to this wikipedia page: ")
-        print("============================================================")
-        for element in DATA["query"]["pages"][0]["revisions"]:
-            count +=1
-            print(f"{count}) User: {element['user']} || Date: {element['timestamp']}")
-    
+        revisions = DATA["query"]["pages"][0].get("revisions", [])
+
+
+        for rev in reversed(revisions):
+            # print revisions in reverse order
+            print(f"{rev['timestamp']} {rev['user']}")

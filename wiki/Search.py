@@ -21,16 +21,19 @@ class Search(ConnectToAPI):
         # use ConnectToApi inheritence to perform get request
         DATA = super().connect(self.params, self.name)
 
-        # check if search results exists
-        if DATA['query']['searchinfo']["totalhits"] == 0:
-            print("No search found")
-        # if search equals first item in search
-        elif DATA['query']['search'][0]['title'].lower() == search_page.lower():
-            revisions = Revisions()
-            revisions.getRevisions(DATA['query']['search'][0]['title'])
-        # redirection
+        search_info = DATA["query"]["searchinfo"]
+        search_results = DATA["query"]["search"]
+
+        if search_info["totalhits"] == 0 or not search_results:
+            raise ValueError("Error: No Wikipedia page found for given name.")
+        
+        first_title = search_results[0]["title"]
+        # if first title matches search term
+        if first_title.lower() == search_page.lower():
+            title_to_use = first_title
         else:
-            newSearch = DATA['query']['search'][0]['title']
-            print(f"\nYou were redirected from {search_page} to {newSearch}")
-            revisions = Revisions()
-            revisions.getRevisions(newSearch)
+            print(f"Redirected to {first_title}")
+            title_to_use = first_title
+
+        revisions = Revisions()
+        revisions.getRevisions(title_to_use)
