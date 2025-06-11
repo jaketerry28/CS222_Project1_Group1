@@ -27,7 +27,6 @@ class Revisions(ConnectToAPI):
 
         revisions = DATA["query"]["pages"][0].get("revisions", [])
 
-
-        for rev in reversed(revisions):
-            # print revisions in reverse order
+        for rev in revisions:
+            # print revisions in reverse chronological order
             print(f"{rev['timestamp']} {rev['user']}")
